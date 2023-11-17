@@ -2,48 +2,32 @@
 <html>
 
 <head>
-  <title>Color Coded Clock</title>
+  <title>Adjustable Clock</title>
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body onload="startClock();">
   <p id="timePar" class="normalClock">0:0:0</p>
-  <p class="normalClock">Hi Kim!!! This is my clock</p>
 
   <p>
-    <button onclick="selectFastClock();">Fast Clock</button>
-  </p>
-  <p>
-    <button onclick="selectSlowClock();">Slow Clock</button>
-  </p>
-  <p>
-    <button onclick="selectNormalClock();">Normal Clock</button>
+    <input type="number" id="minutesOffsetInput" value="">
+    <button onclick="doReadMinutesOffsetFromPage();">Minutes offset</button>
   </p>
 
   <script type="text/javascript">
 
     var minutesOffset = 0;
 
-    function selectFastClock() {
-      let outputElement = document.getElementById("timePar");
-      outputElement.className = "fastClock";
-      minutesOffset = 5;
-      tick();
-    }
-
-    function selectSlowClock() {
-      let outputElement = document.getElementById("timePar");
-      outputElement.className = "slowClock";
-      minutesOffset = -5;
-      tick();
-    }
-
-    function selectNormalClock() {
-      let outputElement = document.getElementById("timePar");
-      outputElement.className = "normalClock";
-      minutesOffset = 0;
-      tick();
+    function doReadMinutesOffsetFromPage() {
+      let minutesOffsetElement = document.getElementById("minutesOffsetInput");
+      let inputString = minutesOffsetElement.value;
+      if (inputString.length == 0) {
+        alert("Please enter an offset value");
+      }
+      else {
+        minutesOffset = Number(inputString);
+      }
     }
 
     function tick() {
